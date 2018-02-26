@@ -9,3 +9,4 @@ You can use this frequency list to study the most common words from a text to be
 ## Tips
   * if the imput has garbage (HTML, other language texts) it doesn't matter
   * just mirror your favorite (wanna to understand website) then concatenate all the html files to an input.txt then you can learn the frequent words for that particular website
+  * run it on your book to read, or on the SRT of your movie
