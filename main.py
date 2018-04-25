@@ -46,7 +46,7 @@ def write_csv():
                 #if m:
                 #    sentence = m.group(1) + word[0] + m.group(2)
                 #csvwriter.writerow([word[0], str(word[4]), word[2], word[3], word[4], sentence])
-                csvwriter.writerow([word[0], str(word[4]), word[2], word[3], word[4]])
+                csvwriter.writerow([word[0], str(word[4]), word[2], word[3]])
 
 
 def count_words():
@@ -58,9 +58,9 @@ def count_words():
 
 
 def custom_cmp(a, b):
-    if len(b[0].decode("utf-8")) == 1:
+    if len(b[0].decode("utf-8")) == 1 and len(a[0].decode("utf-8")) != 1:
         return -1
-    elif len(a[0].decode("utf-8")) == 1:
+    elif len(a[0].decode("utf-8")) == 1 and len(b[0].decode("utf-8")) != 1:
         return 1
     else:
         if a[4] > b[4]:
