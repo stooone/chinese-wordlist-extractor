@@ -58,9 +58,9 @@ def count_words():
 
 
 def custom_cmp(a, b):
-    if len(a[0]) > len(b[0]):
+    if len(b[0].decode("utf-8")) == 1:
         return -1
-    elif len(a[0]) < len(b[0]):
+    elif len(a[0].decode("utf-8")) == 1:
         return 1
     else:
         if a[4] > b[4]:
