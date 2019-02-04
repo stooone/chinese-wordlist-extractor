@@ -19,10 +19,8 @@ def parse_dictionary():
         for line in f:
             if re.match("^#", line):
                 continue
-            m = re.search('^(.*) (.*) \[(.*)\] /(.*)/', line)
-            if re.match("\w", m.group(1)) or re.match("%", m.group(1)):
-                continue
-            dictionary.append([m.group(1), m.group(2), m.group(3), m.group(4), 0, ''])
+            m = re.search('^(.*) (.*) \[(.*)\] /(.*)/', line, re.UNICODE)
+            dictionary.append([m.group(2), m.group(3), m.group(4), 0, ''])
 
 
 def load_document():
@@ -38,15 +36,8 @@ def write_csv():
     with open('output.csv', 'wb') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         for word in dictionary:
-            if word[4] > 0:
-                #sentence = ''
-                #delimiter = '。：“、，>; < ，'
-                #pattern = re.compile(r'[' + delimiter + ']+([^' + delimiter + ']*)' + word[0] + '([^' + delimiter + ']*)[' + delimiter + ']+', flags=re.LOCALE)
-                #m = re.search(pattern, document)
-                #if m:
-                #    sentence = m.group(1) + word[0] + m.group(2)
-                #csvwriter.writerow([word[0], str(word[4]), word[2], word[3], word[4], sentence])
-                csvwriter.writerow([word[0], str(word[4]), word[2], word[3]])
+            if word[3] > 0:
+                csvwriter.writerow([word[0], str(word[3]), word[1], word[2]])
 
 
 def count_words():
@@ -54,7 +45,7 @@ def count_words():
 
     word_count = len(dictionary)
     for word_num in tqdm(range(0, word_count)):
-        dictionary[word_num][4] = document.count(dictionary[word_num][0])
+        dictionary[word_num][3] = document.count(dictionary[word_num][0])
 
 
 def custom_cmp(a, b):
@@ -63,7 +54,7 @@ def custom_cmp(a, b):
     elif len(a[0].decode("utf-8")) == 1 and len(b[0].decode("utf-8")) != 1:
         return 1
     else:
-        if a[4] > b[4]:
+        if a[3] > b[3]:
             return -1
         else:
             return 1
